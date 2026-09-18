@@ -24,6 +24,8 @@
                 Background="#111111">
             <Grid>
                 <Image x:Name="MainImage"
+                       AutomationProperties.Name="Live camera view and photo preview"
+                       AutomationProperties.HelpText="Shows the Infinity-8 live stream or a selected saved photo preview."
                        Stretch="Uniform" />
                 <TextBlock x:Name="OverlayStatusText"
                            Margin="12"

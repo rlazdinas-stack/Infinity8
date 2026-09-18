@@ -78,6 +78,12 @@ public partial class MainWindow : Window
 
     private void GalleryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        if (!_isConnected)
+        {
+            GalleryList.SelectedItem = null;
+            return;
+        }
+
         if (GalleryList.SelectedItem is not SavedPhoto selected)
         {
             return;
