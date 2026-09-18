@@ -1,0 +1,117 @@
+﻿<Window x:Class="Infinity8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Infinity8"
+        mc:Ignorable="d"
+        Title="Infinity-8 Viewer"
+        Height="720"
+        Width="1200"
+        MinHeight="560"
+        MinWidth="900">
+    <Grid Margin="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                BorderBrush="#6B6B6B"
+                BorderThickness="1"
+                CornerRadius="4"
+                Margin="0,0,8,0"
+                Background="#111111">
+            <Grid>
+                <Image x:Name="MainImage"
+                       Stretch="Uniform" />
+                <TextBlock x:Name="OverlayStatusText"
+                           Margin="12"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Padding="8,4"
+                           Background="#AA000000"
+                           Foreground="White"
+                           FontWeight="SemiBold"
+                           Text="Disconnected" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button x:Name="ConnectButton"
+                    Grid.Row="0"
+                    Margin="0,0,0,8"
+                    Height="32"
+                    Click="ConnectButton_Click"
+                    Content="Connect" />
+
+            <Button x:Name="ReturnToLiveButton"
+                    Grid.Row="1"
+                    Margin="0,0,0,12"
+                    Height="32"
+                    Click="ReturnToLiveButton_Click"
+                    Content="Grįžti į Live vaizdą"
+                    IsEnabled="False" />
+
+            <TextBlock Grid.Row="2"
+                       Margin="0,0,0,4"
+                       Text="Exposure"
+                       FontWeight="SemiBold" />
+
+            <StackPanel Grid.Row="3"
+                        Orientation="Horizontal"
+                        Margin="0,0,0,12">
+                <Slider x:Name="ExposureSlider"
+                        Width="190"
+                        Minimum="1"
+                        Maximum="100"
+                        Value="50"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True"
+                        ValueChanged="ExposureSlider_ValueChanged" />
+                <TextBlock x:Name="ExposureValueText"
+                           Margin="8,0,0,0"
+                           VerticalAlignment="Center"
+                           Text="50" />
+            </StackPanel>
+
+            <GroupBox Grid.Row="4" Header="Išsaugotos nuotraukos">
+                <DockPanel Margin="4">
+                    <Button x:Name="SavePhotoButton"
+                            DockPanel.Dock="Top"
+                            Margin="0,0,0,8"
+                            Height="28"
+                            Click="SavePhotoButton_Click"
+                            Content="Išsaugoti kadrą"
+                            IsEnabled="False" />
+                    <ListBox x:Name="GalleryList"
+                             SelectionChanged="GalleryList_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:SavedPhoto}">
+                                <StackPanel Margin="0,0,0,8">
+                                    <Border BorderBrush="#A0A0A0"
+                                            BorderThickness="1"
+                                            CornerRadius="3">
+                                        <Image Source="{Binding Thumbnail}"
+                                               Height="82"
+                                               Stretch="UniformToFill" />
+                                    </Border>
+                                    <TextBlock Margin="0,4,0,0"
+                                               Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>
